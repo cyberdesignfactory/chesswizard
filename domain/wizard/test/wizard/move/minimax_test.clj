@@ -67,7 +67,7 @@
       (is (= [:e8 :f7]
              (minimax-move {
                             :e8 {:type :king :colour :black}
-                            :f7 {:type :bishop :colour :white}
+                            :f7 {:type :rook :colour :white}
                             :e7 {:type :pawn :colour :white}
                            } :black 1)))
       )

@@ -19,7 +19,7 @@ Ensure the following are installed:
 
 Steps:
 - git clone https://github.com/cyberdesignfactory/chesswizard
-- cd domain/chess
+- cd chesswizard/domain/chess
 - lein test  # optional
 - lein install
 - cd ../wizard
