@@ -1,10 +1,10 @@
 # Chess Wizard
 
-Chess Wizard is a wizard who plays chess (using Clojure!).
+Chess Wizard is a wizard who plays chess using Clojure!
 
 Accompanied by a chess rule enforcer and a graphical user interface.
 
-See if you can beat the wizard...
+See if you can beat The Wizard...
 
 ## Live Demo
 
