@@ -1,0 +1,20 @@
+{
+ :paths ["src" "test"]
+
+ :deps
+ {
+  ;; needed?
+  thheller/shadow-cljs {:mvn/version "2.28.14"}
+  reagent/reagent {:mvn/version "1.1.1"}
+  re-frame/re-frame {:mvn/version "1.4.2"}
+
+  binaryage/devtools {:mvn/version "1.0.6"}
+
+  ;; components/components {:local/root "../components"}
+  chess/chess {:local/root "../../domain/chess"}
+  wizard/wizard {:local/root "../../domain/wizard"}
+
+  }
+
+ }
+
