@@ -10,7 +10,7 @@ See if you can beat The Wizard...
 
 https://chesswizard.cyberdesignfactory.com
 
-## Installation
+## Installation / Running Locally
 
 Ensure the following are installed:
 - Java
@@ -19,7 +19,8 @@ Ensure the following are installed:
 
 Steps:
 - git clone https://github.com/cyberdesignfactory/chesswizard
-- cd chesswizard/domain/chess
+- cd chesswizard
+- cd domain/chess
 - lein test  # optional
 - lein install
 - cd ../wizard
