@@ -8,13 +8,14 @@
                           from-square
                           to-square
                           on-square-selected]}]
-  (let [width 396
+  (let [width 396;;200 ;; 396
         height 396]
     (fn [{:keys [position
                  reversed?
                  from-square
                  to-square
                  on-square-selected]}]
+      ;; (js/alert (.-innerWidth js/window))
       [:div {:style {:cursor :pointer}}
        [:> Stage {:width width
                   :height height

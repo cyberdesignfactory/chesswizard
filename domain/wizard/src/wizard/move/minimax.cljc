@@ -25,7 +25,6 @@
                       opponent-move (minimax-move resultant-position
                                                   opponent-colour
                                                   (dec moves-ahead))
-
                       ]
                   (position-score (update-position resultant-position opponent-move)
                                opponent-colour)))

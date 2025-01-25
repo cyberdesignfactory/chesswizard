@@ -33,13 +33,14 @@ Steps:
 - npm i
 - npx shadow-cljs watch app
 
+The webapp should now be running at http://localhost:8280
+
 ## TODO
 
 - Fully enforce castling rules
 - Wizard should value developing its pieces, not just material
 - Wizard should avoid checkmate and value checkmating
 - Notation supports disambiguation
-- Make it look nicer in desktop layout
 
 ## License
 
