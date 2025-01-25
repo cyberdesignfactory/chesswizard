@@ -1,14 +1,17 @@
 # chess
+j
+This library enforces the rules of chess.
 
-A Clojure library designed to ... well, that part is up to you.
+There is an `invalid-move?` function which returns nil if the move is valid, or a keyword indicating why the move is invalid.
 
 ## Usage
 
-FIXME
+lein test  # optional
+lein install
 
 ## License
 
-Copyright © 2024 FIXME
+Copyright © 2025 Robert J Symes
 
 This program and the accompanying materials are made available under the
 terms of the Eclipse Public License 2.0 which is available at

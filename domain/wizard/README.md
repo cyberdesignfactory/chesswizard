@@ -1,14 +1,19 @@
-# wizard
+# Wizard
 
-A Clojure library designed to ... well, that part is up to you.
+The Wizard decides which move to make, given a board position.
+
+There is a function which returns a 'score' for any given board position (currently based just on total material minus opponent's total material).
+
+It then uses the Minimax algorithm to find what it considers to be the best move.
 
 ## Usage
 
-FIXME
+lein test  # optional
+lein install
 
 ## License
 
-Copyright © 2024 FIXME
+Copyright © 2025 Robert J Symes
 
 This program and the accompanying materials are made available under the
 terms of the Eclipse Public License 2.0 which is available at
