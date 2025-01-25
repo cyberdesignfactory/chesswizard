@@ -18,14 +18,9 @@
      (sort-by (fn [move]
                 (let [resultant-position (update-position position move)
                       opponent-colour (reverse-colour colour)
-
-                      ;; opponent-move (simple-move resultant-position  ;; FOR NOW
-                      ;;                            opponent-colour)
-
                       opponent-move (minimax-move resultant-position
                                                   opponent-colour
-                                                  (dec moves-ahead))
-                      ]
+                                                  (dec moves-ahead))]
                   (position-score (update-position resultant-position opponent-move)
                                opponent-colour)))
 

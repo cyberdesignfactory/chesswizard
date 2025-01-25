@@ -37,9 +37,10 @@ The webapp should now be running at http://localhost:8280
 
 ## TODO
 
+- Have board shrink if necessary for smaller width screens
 - Fully enforce castling rules
-- Wizard should value developing its pieces, not just material
 - Wizard should avoid checkmate and value checkmating
+- Wizard should value developing its pieces, not just material
 - Notation supports disambiguation
 
 ## License

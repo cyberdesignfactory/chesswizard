@@ -2,14 +2,14 @@
 
 (defn initial-position []
   {
-   :a1 {:type :rook :colour :white}
+   :a1 {:type :rook :colour :white :can-still-castle? true}
    :b1 {:type :knight :colour :white}
    :c1 {:type :bishop :colour :white}
    :d1 {:type :queen :colour :white}
    :e1 {:type :king :colour :white :can-still-castle? true}
    :f1 {:type :bishop :colour :white}
    :g1 {:type :knight :colour :white}
-   :h1 {:type :rook :colour :white}
+   :h1 {:type :rook :colour :white :can-still-castle? true}
 
    :a2 {:type :pawn :colour :white}
    :b2 {:type :pawn :colour :white}
@@ -20,14 +20,14 @@
    :g2 {:type :pawn :colour :white}
    :h2 {:type :pawn :colour :white}
 
-   :a8 {:type :rook :colour :black}
+   :a8 {:type :rook :colour :black :can-still-castle? true}
    :b8 {:type :knight :colour :black}
    :c8 {:type :bishop :colour :black}
    :d8 {:type :queen :colour :black}
    :e8 {:type :king :colour :black :can-still-castle? true}
    :f8 {:type :bishop :colour :black}
    :g8 {:type :knight :colour :black}
-   :h8 {:type :rook :colour :black}
+   :h8 {:type :rook :colour :black :can-still-castle? true}
 
    :a7 {:type :pawn :colour :black}
    :b7 {:type :pawn :colour :black}

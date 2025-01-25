@@ -22,23 +22,28 @@
     :black))
 
 (defn choose-colour-panel [!game !players]
-  [:div.text-center.p-4
-   [:h4 "Play as..."]
-   [:button.btn.btn-light.m-2
-    {:on-click #(reset! !players {:white :user
-                                  :black :wizard})}
-    "White"]
-   [:button.btn.btn-dark.m-2
-    {:on-click (fn []
-                 (js/setTimeout
-                  (fn []
-                    (let [wizard-move (wizard-move (:initial-position @!game) :white)]
-                      (swap! !game assoc :to-square (second wizard-move))
-                      (swap! !game update :half-moves conj wizard-move)))
-                  200)
-                 (reset! !players {:white :wizard
-                                   :black :user}))}
-    "Black"]])
+  [:div.container
+   [:div.card.bg-light.p-2.m-3
+    [:div.card-body.pb-1.text-center
+     [:div.text-center.p-4
+      [:h4 "Play as..."]
+      [:button.btn.btn-white.m-2
+       {:style {:background-color "#ffffff"
+                :border-color "#777777"}
+        :on-click #(reset! !players {:white :user
+                                     :black :wizard})}
+       "White"]
+      [:button.btn.btn-dark.m-2
+       {:on-click (fn []
+                    (js/setTimeout
+                     (fn []
+                       (let [wizard-move (wizard-move (:initial-position @!game) :white)]
+                         (swap! !game assoc :to-square (second wizard-move))
+                         (swap! !game update :half-moves conj wizard-move)))
+                     200)
+                    (reset! !players {:white :wizard
+                                      :black :user}))}
+       "Black"]]]]])
 
 (defn status-panel [!game]
   [:h5.m-4

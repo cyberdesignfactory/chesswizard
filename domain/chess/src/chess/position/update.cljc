@@ -5,7 +5,7 @@
   (update-vals position
                (fn [piece]
                  (let [{type :type
-                       colour :colour} piece]
+                        colour :colour} piece]
                    (if (= :pawn type)
                      {:type type
                       :colour colour
@@ -78,7 +78,7 @@
           (assoc to {:type :king
                      :colour :white})
           (assoc :d1 {:type :rook
-                                   :colour :white}))
+                      :colour :white}))
 
       ;; check for white king castling right
       (and (= [:e1 :g1] move)
@@ -87,7 +87,7 @@
            (:can-still-castle? piece-moved)
            (= {:type :rook
                :colour :white}
-               (get position :h1)))
+              (get position :h1)))
       (-> position
           (dissoc from)
           (dissoc :h1)
@@ -95,7 +95,7 @@
           (assoc to {:type :king
                      :colour :white})
           (assoc :f1 {:type :rook
-                                   :colour :white}))
+                      :colour :white}))
 
       ;; check for black king castling left
       (and (= [:e8 :c8] move)
@@ -112,7 +112,7 @@
           (assoc to {:type :king
                      :colour :black})
           (assoc :d8 {:type :rook
-                                   :colour :black}))
+                      :colour :black}))
 
       ;; check for black king castling right
       (and (= [:e8 :g8] move)

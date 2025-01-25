@@ -5,36 +5,12 @@
 
 (defn is-checkmate? [position colour-to-move]
 
-  ;; (println "----")
-  ;; (println (is-king-in-check? position colour-to-move))
-  ;; (println (valid-moves position colour-to-move))
-  ;; (println (update-position position [:e1 :e2]))
-  ;; #_(println
-  ;;                     (map #(not (is-king-in-check?
-  ;;                                 (update-position position %)
-  ;;                                 colour-to-move))
-  ;;                          (valid-moves position colour-to-move))
-  ;;                     )
-  ;; (println "====")
-
   (and (is-king-in-check? position colour-to-move)
        (not (some identity
                   (map #(not (is-king-in-check?
                               (update-position position %)
                               colour-to-move))
-                       (valid-moves position colour-to-move))
-                  ))
-
-       #_(zero? (count (filter #(not (is-king-in-check?
-                                      (update-position position %)
-                                      colour-to-move))
-                               (valid-moves position colour-to-move)))))
-
-  #_(and (is-king-in-check? position colour-to-move)
-       (zero? (count (filter #(not (is-king-in-check?
-                                    (update-position position %)
-                                    colour-to-move))
-                             (valid-moves position colour-to-move))))))
+                       (valid-moves position colour-to-move))))))
 
 (defn is-stalemate? [position colour-to-move]
 
@@ -54,20 +30,5 @@
                   (map #(not (is-king-in-check?
                               (update-position position %)
                               colour-to-move))
-                       (valid-moves position colour-to-move))
-                  ))
-
-       #_(zero? (count (filter #(not (is-king-in-check?
-                                    (update-position position %)
-                                    colour-to-move))
-                             (valid-moves position colour-to-move)))))
-
-  #_(and (not (is-king-in-check? position colour-to-move))
-       (zero? (count (filter #(not (is-king-in-check?
-                                    (update-position position %)
-                                    colour-to-move))
-                             (valid-moves position colour-to-move))))))
-
-#_(defn is-stalemate? [position colour]
-  false)
+                       (valid-moves position colour-to-move))))))
 
