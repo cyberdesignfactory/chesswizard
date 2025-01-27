@@ -3,13 +3,15 @@
             [chess.position.update :refer :all]))
 
 (deftest update-position-test
-  (let [
-        white-pawn   {:type :pawn
+  (let [white-pawn   {:type :pawn
                       :colour :white}
         white-bishop {:type :bishop
                       :colour :white}
         white-rook   {:type :rook
                       :colour :white}
+        white-rook-csc   {:type :rook
+                          :colour :white
+                          :can-still-castle? true}
         white-queen  {:type :queen
                       :colour :white}
         white-king   {:type :king
@@ -25,14 +27,16 @@
                       :colour :black}
         black-rook   {:type :rook
                       :colour :black}
+        black-rook-csc   {:type :rook
+                          :colour :black
+                          :can-still-castle? true}
         black-queen  {:type :queen
                       :colour :black}
         black-king   {:type :king
                       :colour :black}
         black-king-csc {:type :king
                         :colour :black
-                        :can-still-castle? true}
-        ]
+                        :can-still-castle? true}]
 
     (testing "Pawn moved"
       (let [position {:d2 white-pawn
@@ -71,7 +75,7 @@
                (update-position position move)))))
 
     (testing "White king castles left"
-      (let [position {:a1 white-rook
+      (let [position {:a1 white-rook-csc
                       :e1 white-king-csc
                       :f1 white-bishop
                       :h1 white-rook
@@ -87,7 +91,7 @@
       (let [position {:a1 white-rook
                       :d1 white-queen
                       :e1 white-king-csc
-                      :h1 white-rook}
+                      :h1 white-rook-csc}
             move [:e1
                   :g1]]
         (is (= {:a1 white-rook
@@ -97,7 +101,7 @@
                (update-position position move)))))
 
     (testing "Black king castles left"
-      (let [position {:a8 black-rook
+      (let [position {:a8 black-rook-csc
                       :e8 black-king-csc
                       :f8 black-bishop
                       :h8 black-rook
@@ -113,7 +117,7 @@
       (let [position {:a8 black-rook
                       :d8 black-queen
                       :e8 black-king-csc
-                      :h8 black-rook}
+                      :h8 black-rook-csc}
             move [:e8 :g8]]
         (is (= {:a8 black-rook
                 :d8 black-queen
@@ -132,6 +136,18 @@
             move [:e2 :e1]]
         (is (= {:e1 {:type :queen :colour :black}}
                (update-position position move)))))
+
+    (testing "Rooks can no longer castle if moved"
+      (let [position {:a1 {:type :rook :colour :white :can-still-castle? true}}
+            move [:a1 :b1]]
+        (is (not (get-in (update-position position move)
+                         [:b1 :can-still-castle?])))))
+
+    (testing "Kings can no longer castle if moved"
+      (let [position {:e1 {:type :king :colour :white :can-still-castle? true}}
+            move [:e1 :d1]]
+        (is (not (get-in (update-position position move)
+                         [:d1 :can-still-castle?])))))
 
     ))
 

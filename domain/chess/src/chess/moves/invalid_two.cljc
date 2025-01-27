@@ -6,7 +6,10 @@
    [chess.moves.bishop :refer [invalid-bishop-move?]]
    [chess.moves.rook :refer [invalid-rook-move?]]
    [chess.moves.queen :refer [invalid-queen-move?]]
-   [chess.moves.king :refer [invalid-king-move?]]))
+   [chess.moves.king-two :refer [invalid-king-move?]]
+   ))
+
+;; ** DUPLICATION OF invalid TO AVOID A CIRCULAR DEPENDENCY **
 
 (defn invalid-move? [move position colour-to-move]
   (let [[from to] move

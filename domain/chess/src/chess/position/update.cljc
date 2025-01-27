@@ -1,5 +1,6 @@
 (ns chess.position.update
-  (:require [chess.helpers :refer [rank file add-rank]]))
+  (:require [chess.helpers :refer [rank file add-rank]]
+            [chess.position.in-check :refer [is-king-in-check?]]))
 
 (defn reset-all-pawns [position]
   (update-vals position
@@ -9,8 +10,20 @@
                    (if (= :pawn type)
                      {:type type
                       :colour colour
-                      :just-moved? false}
+                      ;; :just-moved? false
+                      }
                      piece)))))
+
+(defn reset-king-if-in-check [position colour]
+  (if (is-king-in-check? position colour)
+    (-> position
+        (update-vals (fn [piece]
+                       (if (and (= colour (:colour piece))
+                                (= :king (:type piece)))
+                         (-> piece
+                             (dissoc :can-still-castle?))
+                         piece))))
+    position))
 
 (defn update-position [position move]
 
@@ -20,8 +33,9 @@
   (let [[from to] move
         piece-moved (get position from)
         {type :type
-         colour :colour} piece-moved]
-    ;; * ALSO NEED PROMOTION OF PAWNS (to queen will do for now I think, to avoid extra UI) *
+         colour :colour} piece-moved
+
+        ]
 
     (cond
       ;; check for en passant:
@@ -48,6 +62,7 @@
                         (assoc :just-moved-two-spaces? true))))
 
       ;; check for a white pawn that needs to be promoted
+      ;; FOR NOW: always promote to queen
       (and (= :pawn type)
            (= :white colour)
            (= 8 (rank to)))
@@ -56,6 +71,7 @@
           (assoc to {:type :queen :colour colour}))
 
       ;; check for a black pawn that needs to be promoted
+      ;; FOR NOW: always promote to queen
       (and (= :pawn type)
            (= :black colour)
            (= 1 (rank to)))
@@ -69,7 +85,8 @@
            (= :white colour)
            (:can-still-castle? piece-moved)
            (= {:type :rook
-               :colour :white}
+               :colour :white
+               :can-still-castle? true}
               (get position :a1)))
       (-> position
           (dissoc from)
@@ -86,7 +103,8 @@
            (= :white colour)
            (:can-still-castle? piece-moved)
            (= {:type :rook
-               :colour :white}
+               :colour :white
+               :can-still-castle? true}
               (get position :h1)))
       (-> position
           (dissoc from)
@@ -103,7 +121,8 @@
            (= :black colour)
            (:can-still-castle? piece-moved)
            (= {:type :rook
-               :colour :black}
+               :colour :black
+               :can-still-castle? true}
               (get position :a8)))
       (-> position
           (dissoc from)
@@ -119,9 +138,9 @@
            (= :king type)
            (= :black colour)
            (:can-still-castle? piece-moved)
-
            (= {:type :rook
-               :colour :black}
+               :colour :black
+               :can-still-castle? true}
               (get position :h8)))
       (-> position
           (dissoc from)
@@ -135,5 +154,14 @@
       :else
       (-> position
           (dissoc from)
-          (assoc to piece-moved)))))
+          (reset-all-pawns)
+          (assoc to (-> piece-moved
+                        ;; in case it's a king or rook...
+                        (dissoc :can-still-castle?)))
+
+          #_(reset-king-if-in-check :white)
+
+          #_(reset-king-if-in-check :black)
+
+          ))))
 

@@ -4,7 +4,7 @@
             [chess.moves.invalid-two :refer [invalid-move?]]
             ))
 
-;; we'll put these here for now, but maybe move them later
+;; ** DUPLICATION OF valid-moves TO AVOID A CIRCULAR DEPENDENCY **
 
 (defn all-squares []
   (for [file (map inc (range 8))

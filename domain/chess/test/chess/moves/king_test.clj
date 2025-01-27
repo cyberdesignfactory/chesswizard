@@ -9,6 +9,9 @@
                       :colour :white}
         white-rook {:type :rook
                     :colour :white}
+        white-rook-csc {:type :rook
+                        :colour :white
+                        :can-still-castle? true}
         white-queen {:type :queen
                      :colour :white}
         white-king {:type :king
@@ -20,6 +23,9 @@
                     :colour :black}
         black-rook {:type :rook
                     :colour :black}
+        black-rook-csc {:type :rook
+                        :colour :black
+                        :can-still-castle? true}
         black-king {:type :king
                     :colour :black}
         black-king-csc {:type :king
@@ -71,24 +77,59 @@
 
     (testing "Valid king move - white castling"
       (let [position {:e1 white-king-csc
-                      :a1 white-rook
-                      :h1 white-rook}]
+                      :a1 white-rook-csc
+                      :h1 white-rook-csc}]
         (is (not (invalid-king-move? [:e1 :c1] position :white)))
         (is (not (invalid-king-move? [:e1 :g1] position :white)))))
 
     (testing "Valid king move - black castling"
       (let [position {:e8 black-king-csc
-                      :a8 black-rook
-                      :h8 black-rook}]
+                      :a8 black-rook-csc
+                      :h8 black-rook-csc}]
         (is (not (invalid-king-move? [:e8 :c8] position :black)))
         (is (not (invalid-king-move? [:e8 :g8] position :black)))))
 
     (testing "Invalid king move - white castling but piece in the way"
-      (let [position {:a1 white-rook
+      (let [position {:a1 white-rook-csc
                       :d1 white-queen
                       :e1 white-king-csc
                       :f1 white-bishop
+                      :h1 white-rook-csc}]
+        (is (invalid-king-move? [:e1 :c1] position :white))
+        (is (invalid-king-move? [:e1 :g1] position :white))))
+
+    (testing "Invalid king move - white castling through check"
+      (let [position {:a1 white-rook-csc
+                      :d4 black-rook
+                      :e1 white-king-csc
+                      :f4 black-rook
+                      :h1 white-rook-csc}]
+        (is (invalid-king-move? [:e1 :c1] position :white))
+        (is (invalid-king-move? [:e1 :g1] position :white))))
+
+    (testing "Invalid king move - attempting to castle when in check"
+      (let [position {:a1 white-rook-csc
+                      :e4 black-rook
+                      :e1 white-king-csc
+                      :h1 white-rook-csc}]
+        (is (invalid-king-move? [:e1 :c1] position :white))
+        (is (invalid-king-move? [:e1 :g1] position :white))))
+
+    (testing "Invalid king move - attempting to castle but king cannot still castle"
+      ;;                          i.e. it has moved or been in check
+      (let [position {:a1 white-rook
+                      :e1 white-king
                       :h1 white-rook}]
         (is (invalid-king-move? [:e1 :c1] position :white))
-        (is (invalid-king-move? [:e1 :g1] position :white))))))
+        (is (invalid-king-move? [:e1 :g1] position :white))))
+
+    (testing "Invalid king move - attempting to castle but rook cannot still castle"
+      ;;                          i.e. it has moved
+      (let [position {:a1 white-rook
+                      :e1 white-king-csc
+                      :h1 white-rook}]
+        (is (invalid-king-move? [:e1 :c1] position :white))
+        (is (invalid-king-move? [:e1 :g1] position :white))))
+
+    ))
 

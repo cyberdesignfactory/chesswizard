@@ -1,5 +1,5 @@
-# chess
-j
+# Chess
+
 This library enforces the rules of chess.
 
 There is an `invalid-move?` function which returns nil if the move is valid, or a keyword indicating why the move is invalid.
