@@ -25,7 +25,7 @@
                          piece))))
     position))
 
-(defn update-position [position move]
+(defn inner-update-position [position move]
 
   ;; Assume move is valid
   ;; (as that is checked for elsewhere)
@@ -164,4 +164,6 @@
           #_(reset-king-if-in-check :black)
 
           ))))
+
+(def update-position (memoize inner-update-position))
 
