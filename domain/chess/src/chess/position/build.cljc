@@ -3,7 +3,7 @@
             [chess.position.in-check :refer [is-king-in-check?]]
             ))
 
-(defn inner-build-position [initial-position half-moves]
+(defn build-position [initial-position half-moves]
 
   (let [!position (atom initial-position)]
     (doseq [half-move half-moves]
@@ -35,5 +35,5 @@
                              new-position)))))
     @!position))
 
-(def build-position (memoize inner-build-position))
+;; (def build-position (memoize inner-build-position))
 

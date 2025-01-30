@@ -25,7 +25,7 @@
                          piece))))
     position))
 
-(defn inner-update-position [position move]
+(defn update-position [position move]
 
   ;; Assume move is valid
   ;; (as that is checked for elsewhere)
@@ -165,5 +165,5 @@
 
           ))))
 
-(def update-position (memoize inner-update-position))
+;; (def update-position (memoize inner-update-position))
 

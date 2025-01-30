@@ -4,7 +4,7 @@
             [chess.moves.valid-moves-two :refer [valid-moves]]
             ))
 
-(defn is-king-in-check? [position colour]
+(defn inner-is-king-in-check? [position colour]
   (true?
     ;; https://stackoverflow.com/questions/2969543/why-doesnt-apply-or-true-false-work-in-clojure
     ;; cannot use: (apply or ...)
@@ -14,4 +14,6 @@
               (and
                (= :king (:type (get position to)))
                (= colour (:colour (get position to)))))))))
+
+(def is-king-in-check? (memoize inner-is-king-in-check?))
 
