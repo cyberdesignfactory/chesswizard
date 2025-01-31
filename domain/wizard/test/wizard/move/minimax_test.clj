@@ -3,8 +3,7 @@
             [wizard.move.minimax :refer :all]))
 
 (deftest minimax-move-test
-  (let [
-        white-pawn   {:type :pawn
+  (let [white-pawn   {:type :pawn
                       :colour :white}
         white-knight {:type :knight
                       :colour :white}
@@ -44,7 +43,8 @@
     (testing "But here it can take the pawn"
       (is (= [:e4 :e5]
              (minimax-move {:e4 white-queen
-                            :e5 black-pawn} :white 1))))
+                            :e5 black-pawn
+                            :h7 black-pawn} :white 1))))
 
     (testing "Move must not lead to king being in check"
       (is (not= [:e1 :e2]
@@ -75,6 +75,7 @@
     (testing "But here it can take"
       (is (= [:e1 :e2]
              (minimax-move {:e1 white-king
-                            :e2 black-pawn} :white 1)))))
+                            :e2 black-pawn
+                            :h7 black-pawn} :white 1)))))
   )
 

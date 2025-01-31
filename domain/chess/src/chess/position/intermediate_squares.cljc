@@ -1,7 +1,7 @@
 (ns chess.position.intermediate-squares
   (:require [chess.helpers :refer [rank file make-square]]))
 
-(defn intermediate-squares [move]
+(defn inner-intermediate-squares [move]
   (let [[from to] move]
     (cond
       ;; along a file
@@ -36,4 +36,6 @@
         (for [n (range (count intermediate-files))]
           (make-square (nth intermediate-files n)
                        (nth intermediate-ranks n)))))))
+
+(def intermediate-squares (memoize inner-intermediate-squares))
 

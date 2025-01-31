@@ -7,7 +7,8 @@
    [chess.helpers :refer [reverse-colour]]
    ;; [chess.moves.valid-moves :refer [valid-moves]]
    [chess.moves.valid-moves-two :refer [valid-moves]]
-   [wizard.score.material :refer [position-score]]
+   ;; [wizard.score.material :refer [position-score]]
+   [wizard.score.position :refer [position-score]]
    [wizard.move.simple :refer [simple-move]]
    ))
 

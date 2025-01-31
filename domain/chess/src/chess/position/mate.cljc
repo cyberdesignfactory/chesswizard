@@ -3,7 +3,7 @@
             [chess.position.in-check :refer [is-king-in-check?]]
             [chess.position.update :refer [update-position]]))
 
-(defn is-checkmate? [position colour-to-move]
+(defn inner-is-checkmate? [position colour-to-move]
 
   (and (is-king-in-check? position colour-to-move)
        (not (some identity
@@ -12,7 +12,9 @@
                               colour-to-move))
                        (valid-moves position colour-to-move))))))
 
-(defn is-stalemate? [position colour-to-move]
+(def is-checkmate? (memoize inner-is-checkmate?))
+
+(defn inner-is-stalemate? [position colour-to-move]
 
   ;; should this be just 'are there no valid moves'?
   ;; but then valid_moves would need to be testing for not moving into check etc
@@ -32,3 +34,4 @@
                               colour-to-move))
                        (valid-moves position colour-to-move))))))
 
+(def is-stalemate? (memoize inner-is-stalemate?))

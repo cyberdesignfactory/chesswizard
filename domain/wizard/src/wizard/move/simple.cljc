@@ -6,7 +6,8 @@
    ;; [chess.moves.valid-moves :refer [valid-moves]]
    [chess.moves.valid-moves-two :refer [valid-moves]]
    [chess.position.update :refer [update-position]]
-   [wizard.score.material :refer [position-score]]))
+   [wizard.score.position :refer [position-score]]
+   ))
 
 (defn simple-move [position colour]
   (nth

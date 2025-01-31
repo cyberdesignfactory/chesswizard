@@ -1,5 +1,7 @@
 (ns wizard.score.material)
 
+;; No longer used - has been superseded by wizard.score.position
+
 (defn piece-score [piece-type]
   (case piece-type
     :pawn 1
@@ -9,7 +11,7 @@
     :queen 9
     :king 0))
 
-(defn position-score [position colour]
+(defn material-score [position colour]
   (let [white-pieces (filter #(= :white (:colour %)) (vals position))
         white-material (apply + (map #(piece-score (:type %)) white-pieces))
         black-pieces (filter #(= :black (:colour %)) (vals position))

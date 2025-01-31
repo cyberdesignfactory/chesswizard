@@ -37,7 +37,6 @@ The webapp should now be running at http://localhost:8280
 
 ## TODO
 
-- Wizard should value developing its pieces, not just material
 - Wizard should avoid checkmate and value checkmating
 - Link to source from production app
 - Have board shrink if necessary for smaller width screens
