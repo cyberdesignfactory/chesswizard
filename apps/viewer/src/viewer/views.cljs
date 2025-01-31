@@ -128,7 +128,10 @@
     (fn []
       [:div
        [:div.text-center.bg-primary.pt-4.pb-1
-        [:h2.mb-4.text-secondary "Chess Wizard"]]
+        [:h2.text-secondary.mb-0 "Chess Wizard"]
+        [:a.btn.btn-primary.mb-2 {:href "https://github.com/cyberdesignfactory/chesswizard"
+                                  :style {:text-decoration :none}
+                                  :target :blank} "Source Code"]]
        (if (nil? @!players)
          [choose-colour-panel !game !players]
 
