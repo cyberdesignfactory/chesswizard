@@ -38,10 +38,10 @@ The webapp should now be running at http://localhost:8280
 ## TODO
 
 - Wizard should avoid checkmate and value checkmating
-- Have board shrink if necessary for smaller width screens
 - Port to re-frame
 - Improve namespaces (cdf.cw.*)
 - Display reason why a move is invalid (when user attempts to select 'to' square)
+- Pawns can be promoted to pieces other than a queen
 - Notation supports disambiguation
 - Wizard could perhaps think more moves ahead when less pieces on the board
 

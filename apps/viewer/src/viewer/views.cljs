@@ -70,7 +70,7 @@
       :from-square (:from-square @!game)
       :to-square (:to-square @!game)
       :reversed? (= :wizard (:white @!players))
-
+      :scale-factor (/ (min (.-innerWidth js/window) 440) 440)
       :on-square-selected
       (fn [square]
         (swap! !game

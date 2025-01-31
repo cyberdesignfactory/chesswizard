@@ -6,13 +6,19 @@
 (defn pixi-board [{:keys [position
                           reversed?
                           from-square
+                          scale-factor
                           to-square
                           on-square-selected]}]
-  (let [width 396;;200 ;; 396
-        height 396]
+  (let [
+        ;; width 198 ;; 396;;200 ;; 396
+        ;; height 198 ;; 396
+        width (* 396 (or scale-factor 1.0))
+        height (* 396 (or scale-factor 1.0))
+        ]
     (fn [{:keys [position
                  reversed?
                  from-square
+                 scale-factor
                  to-square
                  on-square-selected]}]
       ;; (js/alert (.-innerWidth js/window))
@@ -26,11 +32,11 @@
                 ;; x (* (/ 396 8) (dec file))
                 ;; y (* (/ 396 8) (- 8 rank))
                 x (if reversed?
-                    (* (/ 396 8) (- 7 (dec file)))
-                    (* (/ 396 8) (dec file)))
+                    (* (/ width 8) (- 7 (dec file)))
+                    (* (/ width 8) (dec file)))
                 y (if reversed?
-                    (* (/ 396 8) (dec rank))
-                    (* (/ 396 8) (- 8 rank)))
+                    (* (/ height 8) (dec rank))
+                    (* (/ height 8) (- 8 rank)))
                 square-colour (if (= 1 (mod (+ file rank) 2))
                                 :white
                                 :black)]
@@ -38,19 +44,10 @@
                           :name name
                           :pos {:x x :y y}
                           :square-colour square-colour
+                          :scale-factor scale-factor
                           :piece (get position name)
                           :selected-from? (= name from-square)
                           :selected-to? (= name to-square)
                           :on-square-selected #(on-square-selected %)
-                          }]))]
-
-       ;; This hack seemed to be needed before...
-       #_[:h4
-        {:style {:visibility :hidden}}
-        (str
-         (if (nil?  from-square) "" (name from-square))
-         " - "
-         (if (nil?  to-square) "" (name to-square)))]
-
-       ])))
+                          }]))]])))
 
